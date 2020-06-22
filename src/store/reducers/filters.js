@@ -1,6 +1,6 @@
 export default function filters(state = [], action) {
   if (action.type === 'FILTER_ADD') {
-    return [...state, filters];
+    return [...state, action.filter];
   }
   if (action.type === 'FILTER_REMOVE') {
     const filteredFilters = state.filter(

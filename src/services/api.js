@@ -10,15 +10,8 @@ class Api {
   handleToken(token, refresh_token) {
     localStorage.setItem('token', token);
     localStorage.setItem('refresh_token', refresh_token);
-  }
-
-  getTokenCredentials() {
-    const token = localStorage.getItem('token');
-    const refresh_token = localStorage.getItem('refresh_token');
-    return {
-      Authorization: `Bearer ${token}`,
-      refresh_token,
-    };
+    this.api.defaults.headers.Authorization = `Bearer ${token}`;
+    this.api.defaults.headers.refresh_token = refresh_token;
   }
 
   async login(email, password) {
@@ -51,9 +44,6 @@ class Api {
       const filter = await this.api.post(
         '/filters',
         { title },
-        {
-          headers: this.getTokenCredentials(),
-        },
       );
       const { token } = filter.headers;
       const { refresh_token } = filter.headers;

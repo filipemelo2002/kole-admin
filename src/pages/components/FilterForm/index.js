@@ -8,7 +8,9 @@ import api from '../../../services/api';
 import './style.css';
 import * as Filters from '../../../store/actions/filter';
 
-function FilterForm({ fetchFilters, filters }) {
+function FilterForm({
+  filters, fetchFilters, removeFilter, addFilter,
+}) {
   const [title, setTitle] = useState('');
 
   async function addNewTitle(e) {
@@ -17,7 +19,9 @@ function FilterForm({ fetchFilters, filters }) {
     if (title.length === 0) {
       alert('Please, fill in the Section name field');
     }
-    // const response = await api.addFilter(title);
+    const response = await api.addFilter(title);
+    console.log(response);
+    if (response) addFilter(response);
   }
 
   useEffect(() => {
@@ -50,7 +54,7 @@ function FilterForm({ fetchFilters, filters }) {
             <li key={`${item.title}-${item.created_at}`}>
               {item.title}
               <span className="filter-actions">
-                <MdDelete size={30} />
+                <MdDelete size={30} onClick={() => removeFilter(item)} />
               </span>
             </li>
           ))}

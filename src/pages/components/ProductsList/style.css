@@ -1,5 +1,6 @@
 .products-list {
   width: 100%;
+  max-width: 1000px;
   overflow-x: auto;
   overflow-y: hidden;
 }

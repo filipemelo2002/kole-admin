@@ -21,9 +21,8 @@ import ManageAccount from '../account';
 
 function Dashboard({ history }) {
   const [selected, setSelected] = useState('dashboard');
-  async function signOut(e) {
-    e.preventDefault();
-    await localStorage.clear();
+  async function signOut() {
+    localStorage.clear();
     history.push('/');
   }
 
@@ -39,23 +38,27 @@ function Dashboard({ history }) {
       <Menu pointing secondary>
         <Menu.Item
           name="Dashboard"
+          as={Link}
+          to="/dashboard"
           onClick={() => setSelected('dashboard')}
           active={selected === 'dashboard'}
         />
         <Menu.Item
           name="Orders"
-          link="/dashboard/orders"
+          as={Link}
+          to="/dashboard/orders"
           onClick={() => setSelected('orders')}
           active={selected === 'orders'}
         />
         <Menu.Item
           name="Credentials"
-          link="/dashboard/accounts"
+          as={Link}
+          to="/dashboard/accounts"
           onClick={() => setSelected('credentials')}
           active={selected === 'credentials'}
         />
         <Menu.Menu position="right">
-          <Menu.Item name="logout">
+          <Menu.Item name="logout" onClick={() => signOut()}>
             <Icon name="power" />
             Logout
           </Menu.Item>

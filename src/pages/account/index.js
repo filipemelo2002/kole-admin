@@ -6,6 +6,7 @@ import './style.css';
 function ManageAccount() {
   return (
     <div className="accounts-dashboard">
+      <h1>Admin&apos;s Credentials</h1>
       <div className="update-form">
         <form id="sign-in">
           <input type="email" placeholder="New E-Mail" />

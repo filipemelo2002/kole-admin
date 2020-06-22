@@ -38,18 +38,22 @@ function Dashboard({ history }) {
       <Menu pointing secondary>
         <Menu.Item
           name="Dashboard"
+          as={Link}
+          to="/dashboard"
           onClick={() => setSelected('dashboard')}
           active={selected === 'dashboard'}
         />
         <Menu.Item
           name="Orders"
-          link="/dashboard/orders"
+          as={Link}
+          to="/dashboard/orders"
           onClick={() => setSelected('orders')}
           active={selected === 'orders'}
         />
         <Menu.Item
           name="Credentials"
-          link="/dashboard/accounts"
+          as={Link}
+          to="/dashboard/accounts"
           onClick={() => setSelected('credentials')}
           active={selected === 'credentials'}
         />

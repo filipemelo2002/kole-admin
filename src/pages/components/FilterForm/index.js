@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 
 // import { Container } from './styles';
-import { MdModeEdit, MdDelete } from 'react-icons/md';
+import { MdDelete } from 'react-icons/md';
 import './style.css';
 
 import api from '../../../services/api';
@@ -29,8 +29,7 @@ function FilterForm() {
         const response = await api.getFilters();
         setFilters(response);
       } catch (err) {
-        console.log(err);
-        // throw Error('error when fetching for Filters');
+        throw Error('error when fetching for Filters');
       }
     }
     fetchFilters();

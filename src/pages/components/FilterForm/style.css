@@ -40,4 +40,10 @@
 }
 .filter-actions {
   display: flex;
+  color: #3d3d3d;
+  cursor: pointer;
+  transition: all 200ms ease-in;
+}
+.filter-actions:hover {
+  color: #d11a2a;
 }

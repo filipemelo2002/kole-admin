@@ -22,15 +22,21 @@
 .filters-list {
   width: 100%;
   margin-top: 15px;
+  font-size: 20px;
 }
 .filters-list ul {
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
 }
 .filters-list li {
   width: 100%;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.filters-list li + li {
+  margin-top: 12px;
 }
 .filter-actions {
   display: flex;

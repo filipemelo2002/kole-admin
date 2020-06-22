@@ -59,8 +59,7 @@ function FilterForm() {
             <li key={`${item.title}-${item.created_at}`}>
               {item.title}
               <span className="filter-actions">
-                <MdModeEdit />
-                <MdDelete />
+                <MdDelete size={30} color="#d11a2a" />
               </span>
             </li>
           ))}

@@ -1,0 +1,69 @@
+.products-list {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.list {
+  width: 100%;
+  align-items: flex-start;
+  display: flex;
+}
+.card {
+  margin: 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 300px;
+  min-width: 300px;
+  font-family: 'Roboto Slab';
+}
+.card img {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  width: 100%;
+  height: auto;
+}
+.card-content {
+  padding: 20px;
+  padding-top: 5px;
+}
+.card-content p {
+  margin-top: 10px;
+  color: #999999;
+  font-size: 14px;
+}
+.card-content div {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.price {
+  color: #2c7873;
+}
+.card-buttons {
+  background: transparent;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.card-buttons button {
+  margin: 5px;
+  background-color: transparent;
+  color: #b4b4b4;
+  font-size: 18px;
+  height: 30px;
+  width: 30px;
+  border: 1px solid #b4b4b4;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+.card-buttons button:hover {
+  background-color: #3d3d3d;
+  color: white;
+}

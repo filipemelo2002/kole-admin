@@ -21,9 +21,8 @@ import ManageAccount from '../account';
 
 function Dashboard({ history }) {
   const [selected, setSelected] = useState('dashboard');
-  async function signOut(e) {
-    e.preventDefault();
-    await localStorage.clear();
+  async function signOut() {
+    localStorage.clear();
     history.push('/');
   }
 
@@ -55,7 +54,7 @@ function Dashboard({ history }) {
           active={selected === 'credentials'}
         />
         <Menu.Menu position="right">
-          <Menu.Item name="logout">
+          <Menu.Item name="logout" onClick={() => signOut()}>
             <Icon name="power" />
             Logout
           </Menu.Item>

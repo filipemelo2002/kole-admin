@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 // import { Container } from './styles';
-import logo from '../assets/logo.svg';
+import logo from '../assets/logo.png';
 import './style.css';
 
 import api from '../../services/api';
@@ -33,7 +33,12 @@ function Login({ history }) {
   }, []);
   return (
     <div className="login-container">
-      <img src={logo} width="250" alt="kole's kreations" />
+      <img
+        src={logo}
+        width="200"
+        alt="kole's kreations"
+        id="logo-home"
+      />
       <div className="form-container">
         <h1>Sign in</h1>
         <form id="sign-in">

@@ -11,3 +11,10 @@ export function removeFilter(filter) {
     filter,
   };
 }
+
+export function fetchFilters(filters) {
+  return {
+    type: 'FILTER_FETCH',
+    filters,
+  };
+}

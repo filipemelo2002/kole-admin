@@ -28,6 +28,7 @@ function ProductForm() {
   }
   return (
     <div className="products">
+      <h1>Product</h1>
       <form onSubmit={addProduct}>
         <input
           type="file"
@@ -51,6 +52,7 @@ function ProductForm() {
             placeholder="Section"
             onSelect={(e) => setFilterId(e.target.value)}
           >
+            <option>Filter</option>
             {filters.map((filter) => (
               <option
                 value={filter.id}

@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // import { Container } from './styles';
 import { MdDelete } from 'react-icons/md';
-import './style.css';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import api from '../../../services/api';
-import filtersContext from '../../manage/context';
+import './style.css';
+import * as Filters from '../../../store/actions/filter';
 
-function FilterForm() {
-  const { history, filters, setFilters } = useContext(filtersContext);
+function FilterForm({ fetchFilters, filters }) {
   const [title, setTitle] = useState('');
 
   async function addNewTitle(e) {
@@ -16,25 +16,17 @@ function FilterForm() {
 
     if (title.length === 0) {
       alert('Please, fill in the Section name field');
-      return;
     }
-    const response = await api.addFilter(title);
-    if (!response) history.push('/');
-    setFilters([...filters, response]);
+    // const response = await api.addFilter(title);
   }
 
   useEffect(() => {
-    async function fetchFilters() {
-      try {
-        const response = await api.getFilters();
-        setFilters(response);
-      } catch (err) {
-        throw Error('error when fetching for Filters');
-      }
+    async function getFilters() {
+      const data = await api.getFilters();
+      fetchFilters(data);
     }
-    fetchFilters();
+    getFilters();
   }, []);
-
   return (
     <div className="filters">
       <h1>Filters</h1>
@@ -67,5 +59,9 @@ function FilterForm() {
     </div>
   );
 }
-
-export default FilterForm;
+const mapStateToProps = (state) => ({ filters: state.filters });
+const mapDispatchToProps = (dispatch) => bindActionCreators(Filters, dispatch);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(FilterForm);

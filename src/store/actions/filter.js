@@ -1,4 +1,4 @@
-import { api } from '../../services/api';
+import api from '../../services/api';
 import { getHeaderPayload, updateSessionToken } from '../../utils/handleSessionTokens';
 
 export function addFilter(filter) {

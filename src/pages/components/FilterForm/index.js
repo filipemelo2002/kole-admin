@@ -1,40 +1,29 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // import { Container } from './styles';
 import { MdDelete } from 'react-icons/md';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import './style.css';
+import { Placeholder } from 'semantic-ui-react';
+import * as Filters from '../../../store/actions/filter';
 
-import api from '../../../services/api';
-import filtersContext from '../../manage/context';
-
-function FilterForm() {
-  const { history, filters, setFilters } = useContext(filtersContext);
+function FilterForm({
+  filters, fetchFilters, removeFilter, addFilter,
+}) {
   const [title, setTitle] = useState('');
 
-  async function addNewTitle(e) {
+  function addNewTitle(e) {
     e.preventDefault();
 
     if (title.length === 0) {
       alert('Please, fill in the Section name field');
-      return;
     }
-    const response = await api.addFilter(title);
-    if (!response) history.push('/');
-    setFilters([...filters, response]);
+    addFilter({ title });
   }
-
   useEffect(() => {
-    async function fetchFilters() {
-      try {
-        const response = await api.getFilters();
-        setFilters(response);
-      } catch (err) {
-        throw Error('error when fetching for Filters');
-      }
-    }
     fetchFilters();
-  }, []);
-
+  }, [fetchFilters]);
   return (
     <div className="filters">
       <h1>Filters</h1>
@@ -54,18 +43,29 @@ function FilterForm() {
       </form>
       <div className="filters-list">
         <ul>
-          {filters.map((item) => (
+          {filters.length > 0 ? filters.map((item) => (
             <li key={`${item.title}-${item.created_at}`}>
               {item.title}
               <span className="filter-actions">
-                <MdDelete size={30} />
+                <MdDelete size={30} onClick={() => removeFilter(item)} />
               </span>
             </li>
-          ))}
+          )) : (
+            <Placeholder>
+              <Placeholder.Line length="full" />
+              <Placeholder.Line length="full" />
+              <Placeholder.Line length="full" />
+              <Placeholder.Line length="full" />
+            </Placeholder>
+          )}
         </ul>
       </div>
     </div>
   );
 }
-
-export default FilterForm;
+const mapStateToProps = (state) => ({ filters: state.filters });
+const mapDispatchToProps = (dispatch) => bindActionCreators(Filters, dispatch);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(FilterForm);

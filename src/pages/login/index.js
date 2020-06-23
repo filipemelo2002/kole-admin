@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 // import { Container } from './styles';
 import logo from '../assets/logo.png';
 import './style.css';
-
+import { updateSessionToken } from '../../utils/handleSessionTokens';
 import api from '../../services/api';
 
 function Login({ history }) {
@@ -16,13 +16,14 @@ function Login({ history }) {
       alert('Make sure to fill in all fields');
       return;
     }
-
-    const response = await api.login(email, password);
-    if (!response) {
-      alert('Error when logging in, please, check your credentials');
-      return;
+    try {
+      const response = await api.post('/admin/login', { email, password });
+      const { token, refreshToken } = response.data;
+      updateSessionToken(token, refreshToken);
+      history.push('/dashboard');
+    } catch (err) {
+      alert('Error when logging. Verify your credentials');
     }
-    history.push('/dashboard');
   }
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -30,7 +31,7 @@ function Login({ history }) {
     if (token && refresh_token) {
       history.push('/dashboard');
     }
-  }, []);
+  }, [history]);
   return (
     <div className="login-container">
       <img

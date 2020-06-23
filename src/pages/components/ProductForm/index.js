@@ -1,11 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 
+import { connect } from 'react-redux';
 // import { Container } from './styles';
-import filtersContext from '../../manage/context';
 import api from '../../../services/api';
 
-function ProductForm() {
-  const { filters, setProducts } = useContext(filtersContext);
+function ProductForm({ filters }) {
   const [pictures, setPicutres] = useState(null);
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
@@ -74,4 +73,4 @@ function ProductForm() {
   );
 }
 
-export default ProductForm;
+export default connect((state) => ({ filters: state.filters }))(ProductForm);

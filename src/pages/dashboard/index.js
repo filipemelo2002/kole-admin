@@ -27,7 +27,7 @@ function Dashboard({ history }) {
     if (!token || !refresh_token) {
       history.push('/');
     }
-  }, []);
+  }, [history]);
   return (
     <Router>
       <Provider store={store}>

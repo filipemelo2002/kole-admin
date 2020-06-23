@@ -23,7 +23,7 @@ function FilterForm({
   }
   useEffect(() => {
     fetchFilters();
-  }, []);
+  }, [fetchFilters]);
   return (
     <div className="filters">
       <h1>Filters</h1>

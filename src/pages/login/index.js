@@ -31,7 +31,7 @@ function Login({ history }) {
     if (token && refresh_token) {
       history.push('/dashboard');
     }
-  }, []);
+  }, [history]);
   return (
     <div className="login-container">
       <img

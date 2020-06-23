@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { MdDelete } from 'react-icons/md';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import api from '../../../services/api';
 import './style.css';
 import * as Filters from '../../../store/actions/filter';
 
@@ -13,23 +12,16 @@ function FilterForm({
 }) {
   const [title, setTitle] = useState('');
 
-  async function addNewTitle(e) {
+  function addNewTitle(e) {
     e.preventDefault();
 
     if (title.length === 0) {
       alert('Please, fill in the Section name field');
     }
-    const response = await api.addFilter(title);
-    console.log(response);
-    if (response) addFilter(response);
+    addFilter({ title });
   }
-
   useEffect(() => {
-    async function getFilters() {
-      const data = await api.getFilters();
-      fetchFilters(data);
-    }
-    getFilters();
+    fetchFilters();
   }, []);
   return (
     <div className="filters">

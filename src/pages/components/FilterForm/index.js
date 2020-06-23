@@ -5,6 +5,7 @@ import { MdDelete } from 'react-icons/md';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import './style.css';
+import { Placeholder } from 'semantic-ui-react';
 import * as Filters from '../../../store/actions/filter';
 
 function FilterForm({
@@ -42,14 +43,21 @@ function FilterForm({
       </form>
       <div className="filters-list">
         <ul>
-          {filters.map((item) => (
+          {filters.length > 0 ? filters.map((item) => (
             <li key={`${item.title}-${item.created_at}`}>
               {item.title}
               <span className="filter-actions">
                 <MdDelete size={30} onClick={() => removeFilter(item)} />
               </span>
             </li>
-          ))}
+          )) : (
+            <Placeholder>
+              <Placeholder.Line length="full" />
+              <Placeholder.Line length="full" />
+              <Placeholder.Line length="full" />
+              <Placeholder.Line length="full" />
+            </Placeholder>
+          )}
         </ul>
       </div>
     </div>
